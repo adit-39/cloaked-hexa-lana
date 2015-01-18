@@ -58,7 +58,7 @@ std = math.sqrt(std - mean * mean)
 finalquery = [(X - mean) / std for X in query]
 
 q=len(finalquery)
-winsize=int(((1-tol)/2)*q)
+#winsize=int(((1-tol)/2)*q)
 
 ex = sum(val)
 ex1 = sum(map(sqr, val))
@@ -108,42 +108,7 @@ count=0
 loc1=0
 mahaldist1=100000000
 
-for i in range(len(finalval)-len(finalquery)+1):
-	x=finalval[i:(i+len(finalquery))]
-	prev=0
-	j=0
-	md=0
-	count=0
 
-	for k in x:
-		if(k != None):
-			count+=1
-	wincount=0
-	y=[]
-	query=[]
-	while(j<len(x)):
-		if(j % winsize==0):
-			prev=j
-		if(wincount<winsize and x[j]!=None):
-			wincount+=1
-			y.append(x[j])
-			query.append(finalquery[j])
-			j+=1
-
-		elif(x[j]==None):
-			j+=1	
-		elif(wincount==winsize):
-			md+=MahalanobisDist(y,query)
-			wincount=0
-			j=prev
-	
-	md+=MahalanobisDist(y,query)
-	ml=md/count
-	if(mahaldist1>ml):
-                mahaldist1=ml
-                loc1=i
-'''
-#----------remove-----------------------#
 for i in range(len(finalval)-len(finalquery)+1):
 	x=finalval[i:(i+len(finalquery))]
 	prev=0
@@ -176,8 +141,6 @@ for i in range(len(finalval)-len(finalquery)+1):
                 loc1=i
 	#print(mahaldist,ml,i)
 
-#-----------remove_end--------------#
-'''
 	
 print("Location regular: ",loc1)
 print("Distance regular: ",mahaldist1)

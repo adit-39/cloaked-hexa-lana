@@ -33,7 +33,6 @@ for x1 in l1:
 		y1=float(x1)
 		val.append(y1)
 f.close()
-print("Number of points in Candidate : %d"%len(val))
 
 print("Total points= ",len(val))
 f=open("SampleQuery.txt","r")

@@ -16,14 +16,17 @@ def sqr(z):
 
 #m=int(sys.argv[1])		## Number of points of candidate
 #q=int(sys.argv[2])		## Number of points of query
-n=int(sys.argv[1]) 		## Number of points to be made None
-tol=float(sys.argv[2])		## Tolerance level
+#n=int(sys.argv[1]) 		## Number of points to be made None
+#tol=float(sys.argv[2])		## Tolerance level
+
+n=40
+tol=0.05
 
 
 val=[]
 query=[]
 
-f=open("SampleData.txt","r")
+f=open("SampleCandidateWithMissing.txt","r")
 s1=f.read()
 l1=s1.split()
 for x1 in l1:
@@ -33,7 +36,6 @@ for x1 in l1:
 		y1=float(x1)
 		val.append(y1)
 f.close()
-print("Number of points in Candidate : %d"%len(val))
 
 print("Total points= ",len(val))
 f=open("SampleQuery.txt","r")
@@ -59,22 +61,23 @@ finalquery = [(X - mean) / std for X in query]
 
 q=len(finalquery)
 winsize=int(((1-tol)/2)*q)
-
+'''
 ex = sum(val)
 ex1 = sum(map(sqr, val))
 mean = ex / len(val)
 std = ex1 / len(val)
 std = math.sqrt(std - mean * mean)
 val = [(X - mean) / std for X in val]
-
+'''
 
 for i in range(len(val)):
 	d1[i+1]=val[i]
 
+'''
 for i in range(n):
 	r=randrange(1,len(val))
 	d1[r]=None
-
+'''
 
 finalval=[]
 
@@ -107,7 +110,7 @@ wincount=0
 count=0
 loc1=0
 mahaldist1=100000000
-
+'''
 for i in range(len(finalval)-len(finalquery)+1):
 	x=finalval[i:(i+len(finalquery))]
 	prev=0
@@ -177,7 +180,7 @@ for i in range(len(finalval)-len(finalquery)+1):
 	#print(mahaldist,ml,i)
 
 #-----------remove_end--------------#
-'''
+
 	
 print("Location regular: ",loc1)
 print("Distance regular: ",mahaldist1)
@@ -185,5 +188,5 @@ print("Distance regular: ",mahaldist1)
 pylab.plot([x for x in range((loc1),(loc1+len(finalquery)))],finalval[(loc1):(loc1+len(finalquery))],"-b",label="original candidate")
 pylab.plot([x for x in range((loc1),(loc1+len(finalquery)))],finalquery,"-g",label="query")
 pylab.legend(loc="upper right")
-pylab.savefig("irregplot.png")
+pylab.savefig("irregplot_old.png")
 
